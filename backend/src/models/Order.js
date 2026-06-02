@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
-const OrderSchema = new Schema({
+const OrderSchema = new mongoose.Schema({
   tenant_id: { 
-    type: Schema.Types.ObjectId, 
+    type: mongoose.Schema.Types.ObjectId, 
     ref: 'Tenant', 
     required: true 
 },
@@ -19,8 +19,9 @@ const OrderSchema = new Schema({
     address: String 
 },
   ordered_items: [{ 
-    product_id: Schema.Types.ObjectId, 
-    qty: Number, price: Number 
+    product_id: mongoose.Schema.Types.ObjectId, 
+    qty: Number, 
+    price: Number 
 }],
   order_status: { 
     type: String, 
@@ -34,6 +35,6 @@ const OrderSchema = new Schema({
 { timestamps: true });
 
 
-const Order = mongoose.model("Integration", OrderSchema);        
+const Order = mongoose.model("Order", OrderSchema);        
 
 module.exports = Order;

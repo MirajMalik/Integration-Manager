@@ -2,7 +2,7 @@ const express = require("express");
 const connectDB = require('../config/db');
 require('dotenv').config();
 
-const TenanModel = require("./models/Tenant.js");
+const TenantModel = require("./models/Tenant.js");
 
 
 const app = express();

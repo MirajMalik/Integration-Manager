@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const ProductSchema = new mongoose.Schema({
   tenant_id: { 
-    type: Schema.Types.ObjectId, 
+    type: mongoose.Schema.Types.ObjectId, 
     ref: 'Tenant', 
     required: true 
 },
@@ -28,6 +28,6 @@ const ProductSchema = new mongoose.Schema({
 { timestamps: true },
 );
 
-const Integration = mongoose.model("Integration", IntegrationSchema);        
+const Product = mongoose.model("Product", ProductSchema);        
 
-module.exports = Integration;
+module.exports = Product;

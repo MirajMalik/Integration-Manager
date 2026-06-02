@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 const IntegrationSchema = new mongoose.Schema({
   tenant_id: { 
-    type: Schema.Types.ObjectId, 
+    type: mongoose.Schema.Types.ObjectId, 
     ref: 'Tenant', 
     required: true 
 },

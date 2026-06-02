@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 
-const MappingSchema = new Schema({
+const MappingSchema = new mongoose.Schema({
   product_id: { 
-    type: Schema.Types.ObjectId, 
+    type: mongoose.Schema.Types.ObjectId, 
     ref: 'Product', 
     required: true 
 },
   integration_id: { 
-    type: Schema.Types.ObjectId, 
+    type: mongoose.Schema.Types.ObjectId, 
     ref: 'Integration', 
     required: true 
 },
