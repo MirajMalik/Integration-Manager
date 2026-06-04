@@ -18,6 +18,11 @@ const TenantSchema = new mongoose.Schema({
     type: String, 
     default: 'starter' 
 },
+  db_name: {
+    type: String,
+    required: true,
+    unique: true
+  }
 }, 
 { timestamps: true }                                           // by default get createdAt, updatedAt
 );
