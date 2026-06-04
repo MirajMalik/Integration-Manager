@@ -1,4 +1,6 @@
 const Tenant = require('../models/Tenant');
+const { getTenantConnection } = require('../../config/dbManager');
+const mongoose = require('mongoose');
 
 // create new tenant
 const createTenant = async (req, res) => {
@@ -18,17 +20,37 @@ const createTenant = async (req, res) => {
         message: 'Tenant with this email already exists' 
       });
     }
+    // unique db name for tenant
+    const db_name = `tenant_${company_name.toLowerCase().replace(/[^a-z0-9]/g, '_')}`;
 
     // new tenant
     const newTenant = new Tenant({
       company_name,
       email,
       password,
-      subscription_plan: subscription_plan || 'starter'
+      subscription_plan: subscription_plan || 'starter',
+      db_name
     });
 
-    // save to database
-    const savedTenant = await newTenant.save();
+     const savedTenant = await newTenant.save();
+
+    //isolated connection for tenant
+    const tenantDb = getTenantConnection(db_name);
+
+    const Product = tenantDb.model('Product');
+    const Integration = tenantDb.model('Integration');
+
+    await Product.create({
+      tenant_id: savedTenant._id,
+      title: 'Sample Product',
+      base_price: 0,
+      total_stock_quantity: 0
+    });
+    await Integration.create({ 
+      tenant_id: savedTenant._id,
+      platform_name: 'Shopify', 
+      credentials: { api_key: 'init_key', access_token: 'init_token' } 
+    });
 
     return res.status(201).json({
       message: 'Tenant created successfully',
