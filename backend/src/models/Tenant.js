@@ -19,7 +19,7 @@ const TenantSchema = new mongoose.Schema({
     default: 'starter' 
 },
 }, 
-{ timestamps: true }                         // by default get createdAt, updatedAt
+{ timestamps: true }                                           // by default get createdAt, updatedAt
 );
 
 
